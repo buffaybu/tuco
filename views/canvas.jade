@@ -1,0 +1,23 @@
+extend layout
+
+block content
+  div(class='canvas' id='canvas')
+    div(class='avatar' id='avatar')
+    div(class='mask' id='mask')
+    div(class='logo' id='logo')
+  div(id='maskR', class="dragdealer")
+    div(class='handle red-bar' id='maskRValue')
+  div(id='maskG', class="dragdealer")
+    div(class='handle red-bar' id='maskGValue')
+  div(id='maskB', class="dragdealer")
+    div(class='handle red-bar' id='maskBValue')
+  div(id='maskA', class="dragdealer")
+    div(class='handle red-bar' id='maskAValue')
+  div(id='logoOpacity', class="dragdealer")
+    div(class='handle red-bar' id='logoOpacityValue')
+  button(id='confirmButton') Get Image
+  h2 output image:
+  img(class='output' id='output')
+  h2 canvas:
+  canvas(id='myCanvas', width='500', height='500') 您的浏览器不支持 canvas
+  script(src='/javascripts/canvas.js')

@@ -1,0 +1,47 @@
+.canvas,
+.canvas>div {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.canvas {
+  position: relative;
+  width: 100vw;
+  max-width: 500px;
+  height: 100vw;
+  max-height: 500px;
+}
+
+.canvas>div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas .avatar {
+  background-image: url(../images/avatar.jpg);
+}
+
+.canvas .mask {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.canvas .logo {
+  background-image: url(../images/alsogay.png);
+}
+
+.dragdealer {
+  background: #e1e1e1;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.dragdealer .red-bar {
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  border-radius: 3px;
+}
