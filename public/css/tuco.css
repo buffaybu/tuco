@@ -21,3 +21,7 @@
     background-color: rgba(0, 0, 0, 0.1); }
   .stage .logo {
     background-image: url(/images/alsogay.png); }
+
+.output {
+  width: 100vw;
+  max-width: 500px; }

@@ -1048,7 +1048,7 @@ return Dragdealer;
   }
 
   function onConfirmButtonClick() {
-    mergeImageWithCanvas(avatarURL, rgbaObjToString(rgba), '../images/alsogay.png', logoOpacity, 500);
+    mergeImageWithCanvas(avatarURL, rgbaObjToString(rgba), '../images/alsogay.png', logoOpacity, 640);
   }
 
   document.getElementById('confirmButton').onclick = onConfirmButtonClick;
