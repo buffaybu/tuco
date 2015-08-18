@@ -1,0 +1,34 @@
+.stage {
+  position: relative;
+  width: 100vw;
+  max-width: 500px;
+  height: 100vw;
+  max-height: 500px;
+
+  &,
+  &>div {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .avatar {
+    background-image: url(/images/avatar.jpg);
+  }
+
+  .mask {
+    background-color: rgba(0, 0, 0, .1);
+  }
+
+  .logo {
+    background-image: url(/images/alsogay.png);
+  }
+}
