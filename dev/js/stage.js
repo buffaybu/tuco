@@ -2,8 +2,10 @@
 // rgba: an rgba string. e.g. 'rgba(255, 153, 153, .7)'
 
 (function() {
-  var slogan = new Image();
-  slogan.src = '../images/1.png';
+  var slogan1 = new Image();
+  var slogan2 = new Image();
+  slogan1.src = '../images/1.png';
+  slogan2.src = '../images/2.png';
   var avatar = new Image();
   avatar.src = '../images/a1.jpg';
 
@@ -15,7 +17,7 @@
     'ctx': ctx,
     'avatarCanvas': avatarCanvas,
     'avatar': avatar,
-    'slogan': slogan,
+    'slogan': slogan1,
     'mask': 'rgba(255, 255, 255, .5)',
     'opacity': .5,
     'blendMode': 'hard-light',
@@ -170,28 +172,24 @@
     $demo1.className = 'active';
     $demo2.className = '';
     maskColorPrefix = 'rgba(255, 255, 255, ';
-    stage.slogan.src = '../images/1.png';
+    stage.slogan = slogan1;
     stage.blendMode = 'hard-light';
-    stage.slogan.onload = function() {
-      drawCanvas(stage);
-    }
+    drawCanvas(stage);
   }
 
   $demo2.onclick = function() {
     $demo2.className = 'active';
     $demo1.className = '';
     maskColorPrefix = 'rgba(0, 0, 0, ';
-    stage.slogan.src = '../images/2.png';
+    stage.slogan = slogan2;
     stage.blendMode = 'soft-light';
-    stage.slogan.onload = function() {
-      drawCanvas(stage);
-    }
+    drawCanvas(stage);
   }
 
   new Dragdealer('canvasTest0', {x: .4, animationCallback: function(x, y) {stage.opacity = x; drawCanvas(stage)}});
   new Dragdealer('canvasTest', {x: .1, animationCallback: function(x, y) {stage.mask = maskColorPrefix + x + ')'; drawCanvas(stage)}});
 
-  slogan.onload = function() { 
+  slogan1.onload = function() { 
     avatar.onload = function() {
       drawCanvas(stage);
     }
