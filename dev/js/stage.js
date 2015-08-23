@@ -1,21 +1,82 @@
 // imgAvatar, imgLogo: url of the image
 // rgba: an rgba string. e.g. 'rgba(255, 153, 153, .7)'
+
 (function() {
+  var slogan = new Image();
+  slogan.src = '../images/1.png';
+  var avatar = new Image();
+  avatar.src = '../images/a1.jpg';
+
+  var canvas = document.getElementById('realtimeCanvas');
+  var avatarCanvas = document.getElementById('avatarCanvas');
+  var ctx = canvas.getContext('2d');
+  var stage = {
+    'canvas': canvas,
+    'ctx': ctx,
+    'avatarCanvas': avatarCanvas,
+    'avatar': avatar,
+    'slogan': slogan,
+    'mask': 'rgba(255, 255, 255, .5)',
+    'opacity': .5,
+    'blendMode': 'hard-light',
+  }
+
+
+  var $outputImg = document.getElementById('outputImg');
+  var timer;
+  function drawCanvas(stage) {
+    var width = stage.canvas.width,
+        height = stage.canvas.height;
+
+    stage.ctx.clearRect(0, 0, width, height);
+    drawImageProp(stage.ctx, stage.avatar);
+
+    stage.ctx.fillStyle = stage.mask;
+    ctx.fillRect(0, 0, width, height);
+
+    stage.ctx.globalCompositeOperation = stage.blendMode;
+    stage.ctx.save();
+    stage.ctx.globalAlpha = stage.opacity;
+    drawImageProp(stage.ctx, stage.slogan);
+    stage.ctx.restore();
+
+    drawImageProp(stage.avatarCanvas.getContext('2d'), stage.canvas);
+
+    stage.canvas.style.display = 'block';
+    $outputImg.style.display = 'none';
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      var outputURL = stage.canvas.toDataURL();
+      $outputImg.src = outputURL;
+      $outputImg.onload = function() {
+        $outputImg.style.display = 'inline';
+        stage.canvas.style.display = 'none';
+      }
+    }, 100);
+  }
+
   var avatarURL = '';
   var $file = document.getElementById('file');
+
+  $outputImg.onclick = function() {
+    console.log(true);
+    $file.click();
+  }
+
   $file.onchange = function() {
     var $avatar = document.getElementById('avatar');
     var file = $file.files[0];
     var reader = new FileReader();
 
-    reader.onloadend = function() {
-      avatarURL = reader.result;
-      document.getElementById('avatar').style.backgroundImage = 'url(' + avatarURL + ')';
-    }
-
     if (file) {
       reader.readAsDataURL(file);
     }
+
+    reader.onloadend = function() {
+      avatar.src = reader.result;
+      drawCanvas(stage);
+    }
+
   }
 
   /**
@@ -101,83 +162,40 @@
     }
   }
 
-  function onConfirmButtonClick() {
-    mergeImageWithCanvas(avatarURL, rgbaObjToString(rgba), '../images/alsogay.png', logoOpacity, 640);
-  }
+  $demo1 = document.getElementById('demo1');
+  $demo2 = document.getElementById('demo2');
+  var maskColorPrefix = 'rgba(255, 255, 255, ';
 
-  document.getElementById('confirmButton').onclick = onConfirmButtonClick;
-
-  var $mask = document.getElementById('mask');
-  var maskR = 0, maskG = 0, maskB = 0;
-  var rgba = {'r': 0, 'g': 0, 'b': 0, 'a': .5};
-  var logoOpacity = 1;
-
-  function rgbaObjToString(rgba) {
-    return 'rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')';
-  }
-
-  function updateMaskChannel(channel, value) {
-    if (channel === 'a') {
-      rgba.a = value;
-    }
-    else if (['r', 'g', 'b'].indexOf(channel) !== -1) {
-      rgba[channel] = Math.floor(value * 255);
-    }
-    else {
-      return;
-    }
-
-    $mask.style.backgroundColor = rgbaObjToString(rgba);
-  }
-
-
-  function updateMaskChannelText(channel, value) {
-    if (channel === 'a') {
-      $maskValues['a'].innerHTML = 'a: ' + Number(value).toFixed(2);
-    }
-    else {
-      $maskValues[channel].innerHTML = channel + ': ' + Math.floor(value * 255);
+  $demo1.onclick = function() {
+    $demo1.className = 'active';
+    $demo2.className = '';
+    maskColorPrefix = 'rgba(255, 255, 255, ';
+    stage.slogan.src = '../images/1.png';
+    stage.blendMode = 'hard-light';
+    stage.slogan.onload = function() {
+      drawCanvas(stage);
     }
   }
 
-  // channel: 'r'|'g'|'b'|'a'
-  function onChannelChange(channel) {
-    return function(x, y) {
-      if (channel === 'a') {
-        if (x < 0 || x > 1) return;
-      }
-      else if (['r', 'g', 'b'].indexOf(channel) !== -1) {
-        if (x < 0 || x > 255) return;
-      }
-      else {
-        return;
-      }
-
-      updateMaskChannel(channel, x);
-      updateMaskChannelText(channel, x);
+  $demo2.onclick = function() {
+    $demo2.className = 'active';
+    $demo1.className = '';
+    maskColorPrefix = 'rgba(0, 0, 0, ';
+    stage.slogan.src = '../images/2.png';
+    stage.blendMode = 'soft-light';
+    stage.slogan.onload = function() {
+      drawCanvas(stage);
     }
   }
 
-  var $maskValues = {
-    'r': document.getElementById('maskRValue'),
-    'g': document.getElementById('maskGValue'),
-    'b': document.getElementById('maskBValue'),
-    'a': document.getElementById('maskAValue')
-  }
+  new Dragdealer('canvasTest0', {x: .4, animationCallback: function(x, y) {stage.opacity = x; drawCanvas(stage)}});
+  new Dragdealer('canvasTest', {x: .1, animationCallback: function(x, y) {stage.mask = maskColorPrefix + x + ')'; drawCanvas(stage)}});
 
-  var $logo = document.getElementById('logo');
-  var $logoOpacityValue = document.getElementById('logoOpacity');
-  function onLogoOpacityChange() {
-    return function(x, y) {
-      if (x < 0 || x > 1) return;
-      logoOpacity = x;
-      $logo.style.opacity = x;
+  slogan.onload = function() { 
+    avatar.onload = function() {
+      drawCanvas(stage);
     }
   }
-
-  new Dragdealer('maskR', {x: rgba.r / 255, animationCallback: onChannelChange('r')});
-  new Dragdealer('maskG', {x: rgba.g / 255, animationCallback: onChannelChange('g')});
-  new Dragdealer('maskB', {x: rgba.b / 255, animationCallback: onChannelChange('b')});
-  new Dragdealer('maskA', {x: rgba.a, animationCallback: onChannelChange('a')});
-  new Dragdealer('logoOpacity', {x: logoOpacity, animationCallback: onLogoOpacityChange('logoOpacity')});
 })()
+
+document.ontouchmove = function(e){ e.preventDefault(); }

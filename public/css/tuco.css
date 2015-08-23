@@ -1,27 +1,186 @@
+@charset "UTF-8";
+.content {
+  position: relative;
+  z-index: 1; }
+
+/*320px布局*/
+@media screen and (min-width: 320px) {
+  html {
+    font-size: 10px; } }
+
+@media screen and (min-width: 375px) {
+  html {
+    font-size: 11.71875px; } }
+
+@media screen and (min-width: 414px) {
+  html {
+    font-size: 12.9375px; } }
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 15px; } }
+
+body {
+  font-size: 1.4rem;
+  /*实际相当于14px*/
+  overflow: hidden; }
+  @media screen and (min-width: 768px) {
+    body .wrapper {
+      width: 500px;
+      margin: 0 auto; } }
+
+html {
+  background: #fff;
+  color: #333;
+  text-rendering: optimizelegibility; }
+
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+  margin: 0;
+  padding: 0; }
+
+body, button, input, select, textarea {
+  font: 300 1.4rem/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans; }
+
+p {
+  margin: 0; }
+
+.hairlines li {
+  position: relative;
+  border: none !important; }
+
+.hairlines li:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #d9d9d9;
+  width: 100%;
+  height: 1px;
+  -webkit-transform: scaleY(0.5);
+  -ms-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+      transform-origin: 0 0; }
+
+.wechat {
+  position: fixed;
+  z-index: 0;
+  top: -26px;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+  .wechat li {
+    margin-left: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid #d9d9d9;
+    list-style: none; }
+    .wechat li .avatar {
+      display: block;
+      float: left;
+      width: 50px;
+      height: 50px;
+      margin-right: 8px;
+      border-radius: 4px;
+      background-size: cover;
+      background-position: center; }
+    .wechat li .right .name {
+      position: relative;
+      top: 2px;
+      font-size: 16px; }
+    .wechat li .right .msg {
+      position: relative;
+      bottom: 2px;
+      font-size: 13px;
+      color: #9b9b9b; }
+  .wechat .wechat-mask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01) 120px, rgba(255, 255, 255, 0.5) 130px, rgba(255, 255, 255, 0.8) 150px, white 185px);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01) 120px, rgba(255, 255, 255, 0.5) 130px, rgba(255, 255, 255, 0.8) 150px, white 185px); }
+
+.realtimeCanvas {
+  width: 100%;
+  height: 100%; }
+
 .stage {
   position: relative;
-  width: 100vw;
-  max-width: 500px;
-  height: 100vw;
-  max-height: 500px; }
-  .stage,
-  .stage > div {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat; }
+  z-index: 1;
+  width: 16rem;
+  height: 16rem;
+  margin: 3rem auto 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
+  .stage .outputImg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%; }
   .stage > div {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%; }
-  .stage .avatar {
-    background-image: url(/images/avatar.jpg); }
-  .stage .mask {
-    background-color: rgba(0, 0, 0, 0.1); }
-  .stage .logo {
-    background-image: url(/images/alsogay.png); }
+  .stage input {
+    display: none; }
 
-.output {
-  width: 100vw;
-  max-width: 500px; }
+.notice {
+  margin-top: 1rem;
+  color: #bdbdbd;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  text-align: center; }
+
+.styles {
+  width: 10rem;
+  margin: 6rem auto 4rem; }
+  .styles > ul > li {
+    display: inline-block;
+    list-style: none;
+    cursor: pointer; }
+    .styles > ul > li.active {
+      outline: 2px solid #FFA8AA; }
+  .styles #demo1,
+  .styles #demo2 {
+    width: 4rem;
+    height: 4rem;
+    background-size: cover; }
+  .styles #demo1 {
+    background-image: url(../images/demo1.jpg);
+    margin-right: 2rem; }
+  .styles #demo2 {
+    background-image: url(../images/demo2.jpg); }
+
+.dragdealer {
+  position: relative;
+  width: 70%;
+  height: .1rem;
+  margin: 0 auto;
+  background: #EEE;
+  margin-bottom: 5rem; }
+
+.dragdealer .handle {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  cursor: pointer; }
+
+.dragdealer .red-bar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #FFA8AA;
+  color: #FFF;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  text-align: center; }
+
+.dragdealer .disabled {
+  background: #898989; }

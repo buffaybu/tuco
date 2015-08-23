@@ -1,1 +1,14 @@
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+$iPhone4: "screen and (min-width : 320px)";
+$iPhone6: "screen and (min-width : 375px)";
+$iPhone6P: "screen and (min-width : 414px)";
+$pad: "screen and (min-width : 768px)";
+
+@import 'reset';
+@import 'wechat';
 @import 'stage';
+@import 'dragdealer';

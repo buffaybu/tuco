@@ -1,26 +1,43 @@
 extend layout
 
 block content
-  div(class='stage')
-    div(class='avatar' id='avatar')
-    div(class='mask' id='mask')
-    div(class='logo' id='logo')
-  from(enctype='multipart/form-data')
-    input(id="file" name='file' type='file')
-    input(type='button' value='Upload')
-  div(id='maskR', class="dragdealer")
-    div(class='handle red-bar' id='maskRValue')
-  div(id='maskG', class="dragdealer")
-    div(class='handle red-bar' id='maskGValue')
-  div(id='maskB', class="dragdealer")
-    div(class='handle red-bar' id='maskBValue')
-  div(id='maskA', class="dragdealer")
-    div(class='handle red-bar' id='maskAValue')
-  div(id='logoOpacity', class="dragdealer")
-    div(class='handle red-bar' id='logoOpacityValue')
-  button(id='confirmButton') Get Image
-  h2 output image:
-  img(class='output' id='output')
-  h2 canvas:
-  canvas(id='canvasProcessor', width='640', height='640') 您的浏览器不支持 canvas
-  script(src='/js/tuco.js')
+  div(class='wrapper')
+    div(class='wechat')
+      ul(class='hairlines')
+        li
+          div(class='avatar' style='background-image: url(images/2f.jpg)')
+          div(class='right')
+            div(class='name') 林二菲
+            div(class='msg') 今晚去吃鸡公煲吧！
+        li
+          canvas(class='avatar' id='avatarCanvas' width='640' height='640')
+          div(class='right')
+            div(class='name') 吴彦祝
+            div(class='msg') 你撤回了一条消息
+        li
+          div(class='avatar' style='background-image: url(images/subscribe.png)')
+          div(class='right')
+            div(class='name') 订阅号
+            div(class='msg') 谱叔兴致坊：东校维纳斯复赛“选手须知！…
+      div(class='wechat-mask')
+    
+    div(class='content')
+      div(class='stage')
+        canvas(id='realtimeCanvas', class='realtimeCanvas', width='640', height='640') 您的浏览器不支持 canvas
+        img(class='outputImg' id='outputImg')
+        input(id='file' name='file' type='file')
+
+      div(class='notice')
+        p ↑ 点击更换图片，长按保存图片
+
+      div(class='styles')
+        ul
+          li(id='demo1' class='active')
+          li(id='demo2')
+
+      div(id='canvasTest0', class='dragdealer')
+        div(class='handle red-bar', id='canvasTestValue')
+      div(id='canvasTest', class='dragdealer')
+        div(class='handle red-bar', id='canvasTestValue')
+
+      script(src='/js/tuco.min.js')

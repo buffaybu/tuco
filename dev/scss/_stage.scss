@@ -1,15 +1,22 @@
+.realtimeCanvas {
+  width: 100%;
+  height: 100%;
+}
+
 .stage {
   position: relative;
-  width: 100vw;
-  max-width: 500px;
-  height: 100vw;
-  max-height: 500px;
+  z-index: 1;
+  width: 16rem;
+  height: 16rem;
+  margin: 3rem auto 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
 
-  &,
-  &>div {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  .outputImg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
   }
 
   &>div {
@@ -20,20 +27,50 @@
     height: 100%;
   }
 
-  .avatar {
-    background-image: url(/images/avatar.jpg);
-  }
-
-  .mask {
-    background-color: rgba(0, 0, 0, .1);
-  }
-
-  .logo {
-    background-image: url(/images/alsogay.png);
+  input {
+    display: none;
   }
 }
 
-.output {
-  width: 100vw;
-  max-width: 500px;
+.notice {
+  margin-top: 1rem;
+  color: #bdbdbd;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  text-align: center;
+}
+
+
+.styles {
+  $demoSize: 4rem;
+  $demoMargin: 2rem;
+  
+  width: $demoSize * 2 + $demoMargin;
+  margin: 6rem auto 4rem;
+
+  >ul>li {
+    display: inline-block;
+    list-style: none;
+    cursor: pointer;
+
+    &.active {
+      outline: 2px solid #FFA8AA;
+    }
+  }
+
+  #demo1,
+  #demo2 {
+    width: $demoSize;
+    height: $demoSize;
+    background-size: cover;
+  }
+
+  #demo1 {
+    background-image: url(../images/demo1.jpg);
+    margin-right: $demoMargin;
+  }
+
+  #demo2 {
+    background-image: url(../images/demo2.jpg);
+  }
 }

@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 // var rev = require('gulp-rev');
@@ -38,6 +39,7 @@ var build = {
 gulp.task('scss', function() {
   return gulp.src(dev.scss)
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
     .pipe(rename(app.name + '.css'))
     .pipe(gulp.dest(dirs.css));
 });
